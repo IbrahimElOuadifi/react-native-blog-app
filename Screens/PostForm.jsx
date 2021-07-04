@@ -70,18 +70,18 @@ const App = () => {
 
     return(
         <>
-        <Appbar.Header>
-            <Appbar.BackAction onPress={ () => dispatch({ type: 'SET_SCREEN', payload: { name: 'HOME', data: null } }) } />
-            <Appbar.Content title={post ? 'Edit Post' : 'Create Post'} />
-        </Appbar.Header>
-        <View style={styles.container}>
-            <TextInput value={fields.title} onChangeText={ title => setfields({ ...fields, title }) } style={styles.m} mode="outlined" label="Title" />
-            <View style={styles.image}>
-                <Button style={{ width: '100%' }} onPress={openImagePickerAsync}>Selet Image</Button>
-                { fields.img.length !== 0 && (<Image style={{ width: 280, height: 280, margin: 8 }} source={{ uri: fields.img }} />) }
+            <Appbar.Header>
+                <Appbar.BackAction onPress={ () => dispatch({ type: 'SET_SCREEN', payload: { name: 'HOME', data: null } }) } />
+                <Appbar.Content title={post ? 'Edit Post' : 'Create Post'} />
+            </Appbar.Header>
+            <View style={styles.container}>
+                <TextInput value={fields.title} onChangeText={ title => setfields({ ...fields, title }) } style={styles.m} mode="outlined" label="Title" />
+                <View style={styles.image}>
+                    <Button style={{ width: '100%' }} onPress={openImagePickerAsync}>Selet Image</Button>
+                    { fields.img.length !== 0 && (<Image style={{ width: 280, height: 280, margin: 8 }} source={{ uri: fields.img }} />) }
+                </View>
+                <Button disabled={isLoading} loading={isLoading} style={styles.m} mode="contained" onPress={handleSubmit}>{post ? 'UPDATE' : 'POST'}</Button>
             </View>
-            <Button disabled={isLoading} loading={isLoading} style={styles.m} mode="contained" onPress={handleSubmit}>{post ? 'UPDATE' : 'POST'}</Button>
-        </View>
         </>
     ); 
 }

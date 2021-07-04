@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { StyleSheet, View, TextInput } from 'react-native'
+import { StyleSheet, View, TextInput, TouchableWithoutFeedback } from 'react-native'
 import { Button, Card, Title, Avatar, IconButton, Text } from 'react-native-paper'
 import Comment from './comment'
 import { UserAPI, FollowAPI, CommentAPI, LikeAPI, SaveAPI } from '../api';
@@ -28,6 +28,7 @@ const App = ({ post, deleteById }) => {
     
 
     const HandelSubmit = () => {
+        if(!text.length) return console.log('empty!')
         createComment();
         setText('');
     };
@@ -72,10 +73,11 @@ const App = ({ post, deleteById }) => {
 
     return(
         <Card>
+            
             <Card.Title 
                 title={name}
                 subtitle={getDate()} 
-                left={ props => <Avatar.Image {...props} source={{ uri: urlPic }} /> } 
+                left={ props => <TouchableWithoutFeedback onPress={() => dispatch({ type: 'SET_SCREEN', payload: { name: 'PROFILE', data: { _id: post.creator, name, urlPic } } })}><Avatar.Image {...props} source={{ uri: urlPic }} /></TouchableWithoutFeedback> } 
                 right={FolowBtn}
             />
             <Card.Cover source={{ uri: post?.img  }} />
